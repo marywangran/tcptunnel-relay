@@ -70,7 +70,8 @@ func handle_front(front net.Conn, port int) {
 
 	var wg sync.WaitGroup
 
-	wg.Add(2)
+	wg.Add(2) 
+	// 全双工裸转发，保持核心的简单，复杂丢给端到端处理
 	go func() {
 		defer wg.Done()
 		io.Copy(front, back)
