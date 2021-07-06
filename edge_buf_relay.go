@@ -81,14 +81,14 @@ func main() {
 
 		defer wg.Done()
 		for {
-			len, err := tun.Read(packet)
-			if len == 0 || err != nil {
+			n, err := tun.Read(packet)
+			if n == 0 || err != nil {
 				break
 			}
-			outq.Enqueue(packet) // 缩短处理路径，放入queue后直接返回
-			//binary.LittleEndian.PutUint32(length, uint32(len))
+			outq.Enqueue(packet[:n]) // 缩短处理路径，放入queue后直接返回
+			//binary.LittleEndian.PutUint32(length, uint32(n))
 			//conn.Write(length)
-			//conn.Write(packet[:len])
+			//conn.Write(packet[:n])
 		}
 	}()
 	go func() {
