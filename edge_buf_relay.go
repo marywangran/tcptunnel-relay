@@ -53,12 +53,12 @@ func main() {
 				tun.Close()
 				break
 			}
-			len := binary.LittleEndian.Uint32(length)
-			n, err = io.ReadFull(conn, packet[:len])
+			l := binary.LittleEndian.Uint32(length)
+			n, err = io.ReadFull(conn, packet[:l])
 			if n == 0 || err != nil {
 				break
 			}
-			inq.Enqueue(packet) // 用别人实现的一个lockless队列
+			inq.Enqueue(packet[:l]) // 用别人实现的一个lockless队列
 			//totun <- packet[:len] // 用channel性能非常差！
 			//tun.Write(packet[:n])
 		}
