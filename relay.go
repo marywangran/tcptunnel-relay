@@ -13,7 +13,7 @@ func main() {
 	var port int
 	var mode int
 	var base int
-	flag.StringVar(&host, "h", "10.198.54.78", "host")
+	flag.StringVar(&host, "h", "2.2.2.2", "host")
 	flag.IntVar(&port, "p", 1234, "port 1234")
 	flag.IntVar(&mode, "m", 0, "server|server-client")
 	flag.Parse()
